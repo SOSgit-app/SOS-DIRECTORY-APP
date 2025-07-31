@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAF SOS Student Directory</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #001B3F;
+            background-image: linear-gradient(45deg, #001B3F 0%, #00308F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-top: 20px;
+            overflow-x: hidden;
+        }
+        .usaf-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            overflow: visible;
+        }
+        .usaf-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+        }
+        h1 {
+            color: #00308F;
+            text-align: center;
+            margin: 45px 0 15px;
+            font-size: 2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+        .search-container {
+            margin: 20px auto;
+            max-width: 600px;
+            position: relative;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #00308F;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+        #searchInput:focus {
+            outline: none;
+            border-color: #0051BB;
+            box-shadow: 0 0 10px rgba(0, 48, 143, 0.2);
+        }
+        #results {
+            margin-top: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .result-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00308F;
+            transition: transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .result-card:hover {
+            transform: translateX(5px);
+        }
+        .student-name {
+            font-weight: bold;
+            color: #00308F;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .flight-info, .instructor-info {
+            color: #444;
+            margin: 5px 0;
+            padding-left: 10px;
+            border-left: 2px solid #00308F;
+        }
+        .no-results {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-style: italic;
+        }
+        /* Custom scrollbar for results */
+        #results::-webkit-scrollbar {
+            width: 8px;
+        }
+        #results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        #results::-webkit-scrollbar-thumb {
+            background: #00308F;
+            border-radius: 4px;
+        }
+        #results::-webkit-scrollbar-thumb:hover {
+            background: #001B3F;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .container {
+                width: 95%;
+                padding: 20px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+            .usaf-logo {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto 15px;
+            }
+            h1 {
+                font-size: 1.6em;
+                margin: 35px 0 25px;
+                letter-spacing: 1px;
+            }
+            .search-container {
+                margin: 15px auto;
+            }
+            #searchInput {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+            .result-card {
+                padding: 15px;
+            }
+            .student-name {
+                font-size: 1em;
+            }
+            .tabs {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .tab {
+                padding: 10px 18px;
+                font-size: 1em;
+                font-weight: 700;
+                margin: 0 3px;
+                border-radius: 6px;
+            }
+            .squadron-info {
+                padding: 0 5px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+            .container {
+                width: 100%;
+                padding: 15px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius: 10px 10px 0 0;
+            }
+            .usaf-logo {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 10px;
+            }
+            h1 {
+                font-size: 1.4em;
+                margin: 30px 0 20px;
+            }
+            #searchInput {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .result-card {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+            #results {
+                padding: 5px;
+            }
+            .flight-info, .instructor-info {
+                font-size: 0.9em;
+                padding-left: 8px;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+            .tab {
+                padding: 10px 16px;
+                font-size: 0.95em;
+                font-weight: 700;
+                margin: 0;
+                width: 100%;
+                max-width: 220px;
+                text-align: center;
+                border-radius: 6px;
+            }
+            .squadron-info {
+                padding: 0;
+            }
+            .squadron-item {
+                font-size: 0.8em;
+                padding: 6px 10px;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.2em;
+                margin: 25px 0 15px;
+            }
+            .tab {
+                font-size: 0.9em;
+                font-weight: 700;
+                padding: 8px 14px;
+                border-radius: 6px;
+            }
+            .squadron-item {
+                font-size: 0.75em;
+                padding: 5px 8px;
+            }
+        }
+
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                min-height: -webkit-fill-available;
+            }
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+            border-bottom: 2px solid #00308F;
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tab {
+            padding: 12px 24px;
+            margin: 0 4px;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #555;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            min-width: fit-content;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .tab.active {
+            color: #ffffff;
+            background: #00308F;
+            border-color: #00308F;
+            box-shadow: 0 4px 8px rgba(0, 48, 143, 0.3);
+        }
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background-color: #00308F;
+            border-radius: 2px;
+        }
+        .tab:hover {
+            color: #00308F;
+            background: #ffffff;
+            border-color: #00308F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+
+        /* Map Styles */
+        .map-container {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .floor-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .floor-btn {
+            padding: 8px 20px;
+            margin: 0 10px;
+            border: 2px solid #00308F;
+            border-radius: 4px;
+            background: white;
+            color: #00308F;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .floor-btn.active {
+            background: #00308F;
+            color: white;
+        }
+        .map-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .map-image.active {
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .tab {
+                padding: 8px 20px;
+                font-size: 1em;
+            }
+            .floor-btn {
+                padding: 6px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .tab {
+                padding: 6px 15px;
+                font-size: 0.9em;
+            }
+            .floor-btn {
+                padding: 5px 12px;
+                font-size: 0.8em;
+                margin: 0 5px;
+            }
+        }
+
+        /* Seating Chart Styles */
+        .seating-chart-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .seating-chart-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Squadron Info Styles */
+        .squadron-info {
+            text-align: center;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .squadron-item {
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .squadron-item.knights {
+            background-color: #FF0000;
+            color: #FFFFFF;
+        }
+        .squadron-item.bulls {
+            background-color: #4B0F0F;
+            color: #FFA500;
+        }
+        .squadron-item.centurions {
+            background-color: #228B22;
+            color: #FFFF00;
+        }
+        .squadron-item.tigers {
+            background-color: #E65100;
+            color: #000000;
+        }
+        .squadron-name {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .squadron-info {
+                padding: 0 10px;
+                gap: 6px;
+            }
+            .squadron-item {
+                font-size: 0.9em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .squadron-info {
+                gap: 5px;
+            }
+            .squadron-item {
+                font-size: 0.85em;
+                padding: 6px 12px;
+            }
+        }
+
+        /* WiFi Credentials Styles */
+        .wifi-credentials-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .wifi-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-width: 450px;
+            margin: 0 auto;
+            border: 2px solid #00308F;
+        }
+        .wifi-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .wifi-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #00308F;
+            margin-bottom: 5px;
+        }
+        .wifi-label {
+            font-weight: 700;
+            color: #00308F;
+            font-size: 1.2em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .wifi-value {
+            font-weight: 700;
+            color: #000;
+            font-size: 1.3em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 2px solid #00308F;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .wifi-card {
+                padding: 20px;
+            }
+            .wifi-item {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            .wifi-label, .wifi-value {
+                font-size: 1em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .wifi-credentials-container {
+                padding: 15px;
+            }
+            .wifi-card {
+                padding: 15px;
+            }
+            .wifi-item {
+                padding: 12px;
+            }
+            .wifi-label, .wifi-value {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Canvas Instructions Styles */
+        .canvas-instructions-container {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .canvas-warning {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .warning-message {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .warning-message ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .warning-message li {
+            margin: 5px 0;
+            font-weight: 600;
+        }
+        .canvas-slides {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .slide-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .canvas-slide {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+        }
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+        .step-label {
+            font-weight: 700;
+            color: #00308F;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 768px) {
+            .canvas-instructions-container {
+                padding: 15px;
+            }
+            .canvas-warning {
+                padding: 15px;
+            }
+            .canvas-slides {
+                padding: 15px;
+            }
+            .slide-container {
+                gap: 15px;
+            }
+            .step-label {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+            .modal-content {
+                width: 95%;
+                max-width: none;
+            }
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .canvas-instructions-container {
+                padding: 10px;
+            }
+            .canvas-warning {
+                padding: 12px;
+            }
+            .canvas-slides {
+                padding: 12px;
+            }
+            .slide-container {
+                gap: 12px;
+            }
+            .step-label {
+                font-size: 0.9em;
+                margin-bottom: 6px;
+            }
+            .modal-content {
+                width: 98%;
+                max-height: 85vh;
+            }
+            .close {
+                top: 5px;
+                right: 15px;
+                font-size: 25px;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            .canvas-instructions-container {
+                padding: 8px;
+            }
+            .canvas-warning {
+                padding: 10px;
+            }
+            .canvas-slides {
+                padding: 10px;
+            }
+            .slide-container {
+                gap: 10px;
+            }
+            .step-label {
+                font-size: 0.85em;
+                margin-bottom: 5px;
+            }
+            .modal-content {
+                width: 100%;
+                max-height: 80vh;
+            }
+            .close {
+                top: 2px;
+                right: 10px;
+                font-size: 20px;
+            }
+        }
+
+        /* Modal/Lightbox Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        .canvas-slide {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .canvas-slide:hover {
+            transform: scale(1.02);
+        }
+
+        /* Navigation Styles */
+        .modal-navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1002;
+        }
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 2px solid #00308F;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #00308F;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .nav-btn:hover {
+            background-color: #00308F;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .nav-btn:disabled:hover {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #00308F;
+            transform: none;
+        }
+        .image-counter {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+            }
+            .image-counter {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .modal-navigation {
+                bottom: 15px;
+                gap: 15px;
+            }
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
+            }
+            .image-counter {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            .modal-navigation {
+                bottom: 10px;
+                gap: 12px;
+            }
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            .image-counter {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="usaf-logo">
+            <img src="{{ url_for('static', filename='sos-logo.png') }}" alt="Squadron Officer School Logo" onerror="this.onerror=null; this.src='{{ url_for('static', filename='usaf-sos-logo.svg') }}'; this.alt='Squadron Officer School Logo';">
+        </div>
+        <h1>Student Directory</h1>
+        
+        <div class="squadron-info">
+            <div class="squadron-item knights">
+                <span class="squadron-name">Knights:</span>A01 - A15
+            </div>
+            <div class="squadron-item bulls">
+                <span class="squadron-name">Bulls:</span>B16 - B30
+            </div>
+            <div class="squadron-item centurions">
+                <span class="squadron-name">Centurions:</span>C31 - C48
+            </div>
+            <div class="squadron-item tigers">
+                <span class="squadron-name">Tigers:</span>F60 - F74
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showContent('search')">Search</button>
+            <button class="tab" onclick="showContent('map')">Map</button>
+            <button class="tab" onclick="showContent('seating')">Polifka Seating Chart</button>
+            <button class="tab" onclick="showContent('internet')">Internet Access</button>
+            <button class="tab" onclick="showContent('canvas')">Canvas Instructions</button>
+        </div>
+
+        <div id="searchContent" class="content-section active">
+            <div class="search-container">
+                <input type="text" 
+                       id="searchInput" 
+                       placeholder="Search by Student Name..."
+                       autocomplete="off">
+            </div>
+            <div id="results"></div>
+        </div>
+
+        <div id="mapContent" class="content-section">
+            <div class="floor-selector">
+                <button class="floor-btn active" onclick="showFloor('first')">First Floor</button>
+                <button class="floor-btn" onclick="showFloor('second')">Second Floor</button>
+            </div>
+            <div class="map-container">
+                <img src="{{ url_for('static', filename='SOSfirstfloorX.png') }}" 
+                     alt="First Floor Map" 
+                     class="map-image active" 
+                     id="first-floor">
+                <img src="{{ url_for('static', filename='SOSsecondfloorX.png') }}" 
+                     alt="Second Floor Map" 
+                     class="map-image" 
+                     id="second-floor">
+            </div>
+        </div>
+
+        <div id="seatingContent" class="content-section">
+            <div class="seating-chart-container">
+                <img src="{{ url_for('static', filename='Polika-seating-chart.png') }}" 
+                     alt="Polifka Seating Chart"
+                     class="seating-chart-image">
+            </div>
+        </div>
+
+        <div id="internetContent" class="content-section">
+            <div class="wifi-credentials-container">
+                <h2 style="color: #00308F; text-align: center; margin-bottom: 30px;">SOS WiFi Access</h2>
+                <div class="wifi-card">
+                    <div class="wifi-info">
+                        <div class="wifi-item">
+                            <span class="wifi-label">Network Name:</span>
+                            <span class="wifi-value">Awaken</span>
+                        </div>
+                        <div class="wifi-item">
+                            <span class="wifi-label">Password:</span>
+                            <span class="wifi-value">Op3r@tionVittLe5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="canvasContent" class="content-section">
+            <div class="canvas-instructions-container">
+                <div class="canvas-warning">
+                    <h2 style="color: #d32f2f; text-align: center; margin-bottom: 20px;">⚠️ Important Notice</h2>
+                    <div class="warning-message">
+                        <p><strong>These instructions will only work on:</strong></p>
+                        <ul>
+                            <li>Personal devices with a CAC reader</li>
+                            <li>NIPR devices</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="canvas-slides">
+                    <h3 style="color: #00308F; text-align: center; margin: 30px 0 20px;">Canvas Access Instructions</h3>
+                    <div class="slide-container">
+                        <div class="step-container">
+                            <div class="step-label">Step 1</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide1.jpg') }}" alt="Canvas Instruction Slide 1" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 2</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide2.jpg') }}" alt="Canvas Instruction Slide 2" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 3</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide3.jpg') }}" alt="Canvas Instruction Slide 3" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 4</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide4.jpg') }}" alt="Canvas Instruction Slide 4" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 5</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide5.jpg') }}" alt="Canvas Instruction Slide 5" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 6</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide6.jpg') }}" alt="Canvas Instruction Slide 6" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 7</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide7.jpg') }}" alt="Canvas Instruction Slide 7" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 8</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide8.jpg') }}" alt="Canvas Instruction Slide 8" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 9</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide9.jpg') }}" alt="Canvas Instruction Slide 9" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 10</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide10.jpg') }}" alt="Canvas Instruction Slide 10" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 11</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide11.jpg') }}" alt="Canvas Instruction Slide 11" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                        <div class="step-container">
+                            <div class="step-label">Step 12</div>
+                            <img src="{{ url_for('static', filename='Canvas/Slide12.jpg') }}" alt="Canvas Instruction Slide 12" class="canvas-slide" onclick="openModal(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for expanded images -->
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div class="modal-navigation">
+                <button class="nav-btn prev-btn" onclick="previousImage()">‹</button>
+                <span class="image-counter" id="imageCounter">1 / 12</span>
+                <button class="nav-btn next-btn" onclick="nextImage()">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('results');
+        let debounceTimeout;
+
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                const query = this.value.trim();
+                if (query.length < 2) {
+                    resultsDiv.innerHTML = '';
+                    return;
+                }
+                
+                fetch(`/search?query=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            resultsDiv.innerHTML = '<div class="no-results">No students found</div>';
+                            return;
+                        }
+
+                        resultsDiv.innerHTML = data.map(student => `
+                            <div class="result-card">
+                                <div class="student-name">${student.student_name}</div>
+                                <div class="flight-info">Flight: ${student.flight_number}</div>
+                                <div class="instructor-info">Instructor: ${student.instructor_name}</div>
+                            </div>
+                        `).join('');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        resultsDiv.innerHTML = '<div class="no-results">An error occurred while searching</div>';
+                    });
+            }, 300);
+        });
+
+        // Tab switching functionality
+        function showContent(contentType) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content
+            document.getElementById(contentType + 'Content').classList.add('active');
+            
+            // Add active class to selected tab
+            const selectedTab = Array.from(document.querySelectorAll('.tab')).find(tab => 
+                tab.textContent.toLowerCase().includes(contentType.toLowerCase())
+            );
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+        }
+
+        // Floor map switching functionality
+        function showFloor(floor) {
+            // Update floor buttons
+            document.querySelectorAll('.floor-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update map images
+            document.querySelectorAll('.map-image').forEach(map => {
+                map.classList.remove('active');
+            });
+            document.getElementById(floor + '-floor').classList.add('active');
+        }
+
+        // Modal functionality
+        let currentImageIndex = 0;
+        const canvasImages = [
+            "{{ url_for('static', filename='Canvas/Slide1.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide2.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide3.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide4.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide5.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide6.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide7.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide8.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide9.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide10.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide11.jpg') }}",
+            "{{ url_for('static', filename='Canvas/Slide12.jpg') }}"
+        ];
+
+        function openModal(imgElement) {
+            // Find the index of the clicked image
+            const clickedSrc = imgElement.src;
+            currentImageIndex = canvasImages.findIndex(src => clickedSrc.includes(src.split('/').pop()));
+            if (currentImageIndex === -1) currentImageIndex = 0;
+            
+            updateModalImage();
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        function updateModalImage() {
+            document.getElementById('modalImage').src = canvasImages[currentImageIndex];
+            document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / 12`;
+            
+            // Update button states
+            document.querySelector('.prev-btn').disabled = currentImageIndex === 0;
+            document.querySelector('.next-btn').disabled = currentImageIndex === canvasImages.length - 1;
+        }
+
+        function previousImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateModalImage();
+            }
+        }
+
+        function nextImage() {
+            if (currentImageIndex < canvasImages.length - 1) {
+                currentImageIndex++;
+                updateModalImage();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Keyboard navigation
+        function handleKeyDown(e) {
+            if (e.key === 'ArrowLeft') {
+                previousImage();
+            } else if (e.key === 'ArrowRight') {
+                nextImage();
+            } else if (e.key === 'Escape') {
+                closeModal();
+            }
+        }
+
+        // Add keyboard listener when modal opens
+        function addKeyboardListener() {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        function removeKeyboardListener() {
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html> 
