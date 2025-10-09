@@ -64,37 +64,27 @@ A web application for searching Squadron Officer School student information and 
    docker run -p 8080:8080 --env-file .env student-directory-app
    ```
 
-## Firebase Deployment
+## Google Cloud App Engine Deployment
 
-1. Install Firebase CLI:
+1. Install Google Cloud SDK
+2. Authenticate with your Google Cloud account:
    ```bash
-   npm install -g firebase-tools
+   gcloud auth login
    ```
-
-2. Login to Firebase:
+3. Set your project:
    ```bash
-   firebase login
+   gcloud config set project directory-app-474617
    ```
-
-3. Initialize Firebase:
+4. Deploy to App Engine:
    ```bash
-   firebase init
-   ```
-   - Select Hosting
-   - Choose your project
-   - Set public directory to `static`
-   - Configure as single-page app: No
-
-4. Deploy:
-   ```bash
-   firebase deploy
+   gcloud app deploy
    ```
 
 ## Environment Variables
 
 Create a `.env` file with the following variables:
 ```
-FIREBASE_PROJECT_ID=student-directory-app
+FIREBASE_PROJECT_ID=directory-app-474617
 FIREBASE_PRIVATE_KEY_ID=your-private-key-id
 FIREBASE_PRIVATE_KEY="your-private-key"
 FIREBASE_CLIENT_EMAIL=your-client-email
@@ -112,6 +102,7 @@ student-directory-app/
 ├── app.py                 # Main Flask application
 ├── requirements.txt       # Python dependencies
 ├── Dockerfile            # Docker configuration
+├── app.yaml              # App Engine configuration
 ├── .env                  # Environment variables
 ├── .gitignore           # Git ignore rules
 ├── static/              # Static files
@@ -143,4 +134,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Container Image URL
 
-gcr.io/student-directory-app-89b78/roster-app 
+gcr.io/directory-app-474617/roster-app

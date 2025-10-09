@@ -14,8 +14,8 @@ COPY . .
 # Make sure the static directory exists
 RUN mkdir -p static
 
-# Run the migration script to copy the roster data
-RUN python migrate_data.py
+# Copy the 25G roster data to the correct location
+RUN cp 25Groster.json static/roster_data.json
 
 # Expose port 8080
 EXPOSE 8080

@@ -9,7 +9,7 @@ handlers:
   script: auto
 
 env_variables:
-  GOOGLE_CLOUD_PROJECT: "student-directory-app-89b78"
+  GOOGLE_CLOUD_PROJECT: "directory-app-474617"
 
 instance_class: F1
 

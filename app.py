@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder='static')
 # Load student data from JSON file
 def load_student_data():
     try:
-        file_path = os.path.join(app.static_folder, 'class_roster_29jul.json')
+        file_path = os.path.join(app.static_folder, 'roster_data.json')
         print(f"Attempting to load student data from: {file_path}")
         if not os.path.exists(file_path):
             print(f"ERROR: File does not exist: {file_path}")
