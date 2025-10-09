@@ -135,3 +135,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Container Image URL
 
 gcr.io/directory-app-474617/roster-app
+
+## Recent Updates
+
+- Added Maxwell AFB Map tab for base navigation
+- Fixed automated deployment permissions
+- Updated deployment infrastructure
