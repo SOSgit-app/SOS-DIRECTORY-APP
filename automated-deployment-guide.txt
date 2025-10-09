@@ -1,0 +1,313 @@
+🚀 Complete Guide: Automated Flask App Deployment to Google Cloud Run
+
+Phase 1: Google Cloud Setup
+
+Step 1: Authentication & Project Setup
+gcloud auth login
+# Select the account with access to your target project
+
+gcloud config set project YOUR-PROJECT-ID
+gcloud projects describe YOUR-PROJECT-ID
+
+Step 2: Enable Required APIs
+gcloud services enable cloudbuild.googleapis.com
+gcloud services enable run.googleapis.com 
+gcloud services enable containerregistry.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
+
+Phase 2: Create Deployment Files
+
+Step 3: Create Dockerfile
+Create 'Dockerfile' in your project root:
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+RUN mkdir -p templates
+
+RUN useradd --create-home --shell /bin/bash app && \
+    chown -R app:app /app
+USER app
+
+EXPOSE 8080
+
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=production
+ENV PYTHONUNBUFFERED=1
+
+CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "--bind", "0.0.0.0:8080", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
+
+Step 4: Create cloudbuild.yaml
+Create 'cloudbuild.yaml' in your project root:
+
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'YOUR-SERVICE-NAME'
+      - '--source'
+      - '.'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--memory'
+      - '1Gi'
+      - '--cpu'
+      - '1'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '1'
+      - '--concurrency'
+      - '100'
+      - '--timeout'
+      - '300'
+      - '--set-env-vars'
+      - 'SECRET_KEY=your-production-key,DATABASE_URL=sqlite:///app/your_data.db'
+      - '--quiet'
+
+Step 5: Create GitHub Actions Workflow
+Create '.github/workflows/deploy-to-cloud-run.yml':
+
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  PROJECT_ID: YOUR-PROJECT-ID
+  SERVICE_NAME: YOUR-SERVICE-NAME
+  REGION: us-central1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Configure Docker to use gcloud as a credential helper
+      run: gcloud auth configure-docker
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${{ env.SERVICE_NAME }} \
+          --source . \
+          --region ${{ env.REGION }} \
+          --platform managed \
+          --allow-unauthenticated \
+          --port 8080 \
+          --memory 1Gi \
+          --cpu 1 \
+          --max-instances 10 \
+          --min-instances 1 \
+          --set-env-vars "SECRET_KEY=your-production-key,DATABASE_URL=sqlite:///app/your_data.db" \
+          --quiet
+
+    - name: Get Service URL
+      run: |
+        SERVICE_URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} --region=${{ env.REGION }} --format='value(status.url)')
+        echo "Service deployed to: $SERVICE_URL"
+
+    - name: Test Deployment
+      run: |
+        echo "Testing deployment..."
+        curl -f $SERVICE_URL || exit 1
+        echo "✅ Deployment test successful!"
+
+Step 6: Create Manual Deployment Script
+Windows (deploy-to-[project].bat):
+
+@echo off
+echo Deploying to Google Cloud Run...
+echo.
+
+gcloud config set project YOUR-PROJECT-ID
+
+gcloud run deploy YOUR-SERVICE-NAME ^
+  --source . ^
+  --region us-central1 ^
+  --platform managed ^
+  --allow-unauthenticated ^
+  --port 8080 ^
+  --memory 1Gi ^
+  --cpu 1 ^
+  --max-instances 10 ^
+  --min-instances 1 ^
+  --set-env-vars "SECRET_KEY=your-production-key,DATABASE_URL=sqlite:///app/your_data.db"
+
+echo.
+echo Deployment complete!
+pause
+
+Linux/Mac (deploy-to-[project].sh):
+
+#!/bin/bash
+echo "Deploying to Google Cloud Run..."
+
+gcloud config set project YOUR-PROJECT-ID
+
+gcloud run deploy YOUR-SERVICE-NAME \
+  --source . \
+  --region us-central1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --port 8080 \
+  --memory 1Gi \
+  --cpu 1 \
+  --max-instances 10 \
+  --min-instances 1 \
+  --set-env-vars "SECRET_KEY=your-production-key,DATABASE_URL=sqlite:///app/your_data.db"
+
+echo "Deployment complete!"
+
+Phase 3: Service Account Setup
+
+Step 7: Create Service Account
+gcloud iam service-accounts create github-actions-deploy \
+  --display-name="GitHub Actions Deploy Service Account" \
+  --description="Service account for GitHub Actions to deploy to Cloud Run"
+
+Step 8: Grant ALL Required Permissions
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/run.admin"
+
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/storage.admin"
+
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
+
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/artifactregistry.admin"
+
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/cloudbuild.builds.builder"
+
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/cloudbuild.serviceAgent"
+
+gcloud projects add-iam-policy-binding YOUR-PROJECT-ID \
+  --member="serviceAccount:github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com" \
+  --role="roles/source.admin"
+
+Step 9: Create Service Account Key
+gcloud iam service-accounts keys create github-actions-key.json \
+  --iam-account=github-actions-deploy@YOUR-PROJECT-ID.iam.gserviceaccount.com
+
+Step 10: Add Key to .gitignore
+Add to your .gitignore file:
+# Security - Never commit service account keys
+github-actions-key.json
+
+Phase 4: GitHub Configuration
+
+Step 11: Add GitHub Repository Secret
+1. Go to your GitHub repository
+2. Navigate to Settings > Secrets and variables > Actions
+3. Click "New repository secret"
+4. Name: GCP_SA_KEY
+5. Value: Copy the entire contents of github-actions-key.json file
+
+Phase 5: Initial Deployment & Testing
+
+Step 12: Deploy Manually First
+gcloud run deploy YOUR-SERVICE-NAME \
+  --source . \
+  --region us-central1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --port 8080 \
+  --memory 1Gi \
+  --cpu 1 \
+  --max-instances 10 \
+  --min-instances 1 \
+  --set-env-vars "SECRET_KEY=your-production-key,DATABASE_URL=sqlite:///app/your_data.db"
+
+Step 13: Commit and Push Automation Files
+git add .
+git commit -m "Add automated deployment infrastructure"
+git push origin master
+
+Step 14: Monitor Automated Deployment
+1. Go to https://github.com/YOUR-USERNAME/YOUR-REPO/actions
+2. Watch the "Deploy to Google Cloud Run" workflow
+3. Verify deployment completes successfully
+4. Test the deployed service URL
+
+Phase 6: Testing & Verification
+
+Step 15: Test Automated Deployment
+echo "# Test deployment" >> README.md
+git add README.md
+git commit -m "Test automated deployment"
+git push origin master
+
+Customization Checklist
+Replace these placeholders in ALL files:
+- YOUR-PROJECT-ID → Your actual Google Cloud project ID
+- YOUR-SERVICE-NAME → Your Cloud Run service name
+- your-production-key → Your application's secret key
+- your_data.db → Your database filename
+- YOUR-USERNAME/YOUR-REPO → Your GitHub repository path
+
+Troubleshooting Common Issues
+
+Permission Denied Errors:
+- Verify all 7 IAM roles are assigned to service account
+- Check billing is enabled on the project
+- Ensure APIs are enabled
+
+Build Failures:
+- Check Dockerfile syntax
+- Verify requirements.txt exists
+- Ensure all dependencies are listed
+
+Deployment Failures:
+- Check Cloud Run quotas and limits
+- Verify region availability
+- Check service account key is properly added to GitHub secrets
+
+Expected Final Result
+✅ Application automatically deploys on every push to master
+✅ Service accessible via public URL
+✅ Manual deployment script as backup
+✅ Full CI/CD pipeline operational

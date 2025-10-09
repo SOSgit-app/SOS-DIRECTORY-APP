@@ -46,4 +46,10 @@ docker-compose.override.yml
 
 # System Files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Security - Never commit service account keys
+github-actions-key.json
+*.json
+!requirements.json
+!package.json 

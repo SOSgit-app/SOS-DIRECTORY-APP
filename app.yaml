@@ -1,5 +1,4 @@
 runtime: python39
-service: roster-app
 
 handlers:
 - url: /static
