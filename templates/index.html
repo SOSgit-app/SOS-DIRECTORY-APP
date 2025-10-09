@@ -870,6 +870,7 @@
             <button class="tab active" onclick="showContent('search')">Search</button>
             <button class="tab" onclick="showContent('map')">Map</button>
             <button class="tab" onclick="showContent('seating')">Polifka Seating Chart</button>
+            <button class="tab" onclick="showContent('maxwell')">Maxwell AFB Map</button>
             <button class="tab" onclick="showContent('internet')">Internet Access</button>
             <button class="tab" onclick="showContent('canvas')">Canvas Instructions</button>
         </div>
@@ -905,6 +906,14 @@
             <div class="seating-chart-container">
                 <img src="{{ url_for('static', filename='SOS25Gseatingchart.png') }}" 
                      alt="Polifka Seating Chart - Class 25G"
+                     class="seating-chart-image">
+            </div>
+        </div>
+
+        <div id="maxwellContent" class="content-section">
+            <div class="seating-chart-container">
+                <img src="{{ url_for('static', filename='maxwellmap.png') }}" 
+                     alt="Maxwell AFB Map"
                      class="seating-chart-image">
             </div>
         </div>
