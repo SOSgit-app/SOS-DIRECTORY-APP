@@ -14,8 +14,8 @@ COPY . .
 # Make sure the static directory exists
 RUN mkdir -p static
 
-# Copy the 26A roster data to the correct location
-RUN cp "26A UPDATED.json" static/roster_data.json
+# Copy the 26A roster data to the correct location (file already copied by COPY . .)
+COPY ["26A UPDATED.json", "static/roster_data.json"]
 
 # Expose port 8080
 EXPOSE 8080
