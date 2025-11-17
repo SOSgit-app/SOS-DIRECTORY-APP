@@ -172,7 +172,7 @@
     {
         "flight_number": "A04",
         "instructor_name": "Capt David Gonzalez",
-        "student_name": "SAUER, MATTHEW DAVID R"
+        "student_name": "REED, NOAH M"
     },
     {
         "flight_number": "A04",
@@ -188,11 +188,6 @@
         "flight_number": "A04",
         "instructor_name": "Capt David Gonzalez",
         "student_name": "GUISE, ANDREW JACK"
-    },
-    {
-        "flight_number": "A04",
-        "instructor_name": "Capt David Gonzalez",
-        "student_name": "KANATUS, TINA TRANG"
     },
     {
         "flight_number": "A04",
@@ -367,7 +362,7 @@
     {
         "flight_number": "A10",
         "instructor_name": "Maj Rebecca Hardy",
-        "student_name": "POTTER, KANCHAN Y"
+        "student_name": "GRAVDAHL, JAYCE M"
     },
     {
         "flight_number": "A10",
@@ -383,11 +378,6 @@
         "flight_number": "A10",
         "instructor_name": "Maj Rebecca Hardy",
         "student_name": "JOHNSON, JASMINE SIMONE"
-    },
-    {
-        "flight_number": "A10",
-        "instructor_name": "Maj Rebecca Hardy",
-        "student_name": "BRYANT, JACOB F"
     },
     {
         "flight_number": "A10",
@@ -437,11 +427,6 @@
     {
         "flight_number": "A11",
         "instructor_name": "Capt Joshua Farris",
-        "student_name": "BRADLEY, ROY CLAUDIUS JR"
-    },
-    {
-        "flight_number": "A11",
-        "instructor_name": "Capt Joshua Farris",
         "student_name": "EASLEY, WILLIAM A"
     },
     {
@@ -453,11 +438,6 @@
         "flight_number": "A11",
         "instructor_name": "Capt Joshua Farris",
         "student_name": "HANAVAN, LIAM M"
-    },
-    {
-        "flight_number": "A11",
-        "instructor_name": "Capt Joshua Farris",
-        "student_name": "NELSON, KRISTIN MARY"
     },
     {
         "flight_number": "A11",
@@ -488,6 +468,11 @@
         "flight_number": "A11",
         "instructor_name": "Capt Joshua Farris",
         "student_name": "REEFER, GEORGIANA ORLEEN"
+    },
+    {
+        "flight_number": "A11",
+        "instructor_name": "Capt Joshua Farris",
+        "student_name": "JEUDIN, SAMUEL"
     },
     {
         "flight_number": "A11",
@@ -532,7 +517,7 @@
     {
         "flight_number": "A12",
         "instructor_name": "Maj Kaiwiola Heiderscheit",
-        "student_name": "REED, NOAH M"
+        "student_name": "SAUER, MATTHEW DAVID R"
     },
     {
         "flight_number": "A12",
@@ -577,12 +562,12 @@
     {
         "flight_number": "A13",
         "instructor_name": "Maj Jennifer Lewis",
-        "student_name": "HORAN, SEAN J"
+        "student_name": "SCHWAEGEL, COLE M"
     },
     {
         "flight_number": "A13",
         "instructor_name": "Maj Jennifer Lewis",
-        "student_name": "HORVAT, ALEXANDER L"
+        "student_name": "HORAN, SEAN J"
     },
     {
         "flight_number": "A13",
@@ -642,6 +627,11 @@
     {
         "flight_number": "A14",
         "instructor_name": "Maj Lara Poole ",
+        "student_name": "VENDRELL, GAMALIEL R"
+    },
+    {
+        "flight_number": "A14",
+        "instructor_name": "Maj Lara Poole ",
         "student_name": "SLAYTON, HANNAH M"
     },
     {
@@ -687,22 +677,12 @@
     {
         "flight_number": "A14",
         "instructor_name": "Maj Lara Poole ",
-        "student_name": "DESTEFANO, ANGELICA BRITTANY"
-    },
-    {
-        "flight_number": "A14",
-        "instructor_name": "Maj Lara Poole ",
         "student_name": "ANDERSON, AYANA IMARI"
     },
     {
         "flight_number": "A14",
         "instructor_name": "Maj Lara Poole ",
         "student_name": "LESTER, MATTHEW BLAKE"
-    },
-    {
-        "flight_number": "A14",
-        "instructor_name": "Maj Lara Poole ",
-        "student_name": "HASTINGS, NATALIE R"
     },
     {
         "flight_number": "A14",
@@ -748,11 +728,6 @@
         "flight_number": "B17",
         "instructor_name": "Maj Raquel Lewis",
         "student_name": "TWITCHELL, COLTON"
-    },
-    {
-        "flight_number": "B17",
-        "instructor_name": "Maj Raquel Lewis",
-        "student_name": "UTZ, EMILEE C"
     },
     {
         "flight_number": "B17",
@@ -1092,7 +1067,7 @@
     {
         "flight_number": "B25",
         "instructor_name": "Lt Col Adam Robinson",
-        "student_name": "GARCIA, JUANITA L"
+        "student_name": "STEGER, GABRIELA A"
     },
     {
         "flight_number": "B25",
@@ -1122,17 +1097,7 @@
     {
         "flight_number": "B25",
         "instructor_name": "Lt Col Adam Robinson",
-        "student_name": "BROWN, APRIL MARIE"
-    },
-    {
-        "flight_number": "B25",
-        "instructor_name": "Lt Col Adam Robinson",
         "student_name": "BERTRAND, CALEB LUKE"
-    },
-    {
-        "flight_number": "B25",
-        "instructor_name": "Lt Col Adam Robinson",
-        "student_name": "REGINA, MICHAEL DOMINICK"
     },
     {
         "flight_number": "B25",
@@ -1237,7 +1202,7 @@
     {
         "flight_number": "B27",
         "instructor_name": "Capt Jacob Shapiro",
-        "student_name": "MCCABE, DYLAN J"
+        "student_name": "KOCHIN, EDWARD VLAD"
     },
     {
         "flight_number": "B27",
@@ -1263,11 +1228,6 @@
         "flight_number": "B27",
         "instructor_name": "Capt Jacob Shapiro",
         "student_name": "MASK, MICHAEL T"
-    },
-    {
-        "flight_number": "B27",
-        "instructor_name": "Capt Jacob Shapiro",
-        "student_name": "BLAKE, REBEKAH ANNE"
     },
     {
         "flight_number": "B27",
@@ -1342,11 +1302,6 @@
     {
         "flight_number": "B28",
         "instructor_name": "Maj Thomas Urbanek",
-        "student_name": "JEUDIN, SAMUEL"
-    },
-    {
-        "flight_number": "B28",
-        "instructor_name": "Maj Thomas Urbanek",
         "student_name": "LANDRUM, GREGORY G"
     },
     {
@@ -1373,11 +1328,6 @@
         "flight_number": "B30",
         "instructor_name": "Capt William Yarbrough",
         "student_name": "AMANN, TAYLOR R"
-    },
-    {
-        "flight_number": "B30",
-        "instructor_name": "Capt William Yarbrough",
-        "student_name": "HARTMAN, KATRINA R"
     },
     {
         "flight_number": "B30",
@@ -1448,11 +1398,6 @@
         "flight_number": "C31",
         "instructor_name": "Capt Jonathan Blanton",
         "student_name": "ANDERSON, JILLIAN ELIZABETH"
-    },
-    {
-        "flight_number": "C31",
-        "instructor_name": "Capt Jonathan Blanton",
-        "student_name": "FREEMAN, DAMION M"
     },
     {
         "flight_number": "C31",
@@ -1572,11 +1517,6 @@
     {
         "flight_number": "C33",
         "instructor_name": "Maj Sherese Ingram",
-        "student_name": "NEWTON, MARC E"
-    },
-    {
-        "flight_number": "C33",
-        "instructor_name": "Maj Sherese Ingram",
         "student_name": "ARWOOD, KAITLYN JOY"
     },
     {
@@ -1588,11 +1528,6 @@
         "flight_number": "C33",
         "instructor_name": "Maj Sherese Ingram",
         "student_name": "SCHULTZ, ZACHARY LEE"
-    },
-    {
-        "flight_number": "C33",
-        "instructor_name": "Maj Sherese Ingram",
-        "student_name": "TAFFE, MARLON A"
     },
     {
         "flight_number": "C33",
@@ -1632,6 +1567,11 @@
     {
         "flight_number": "C33",
         "instructor_name": "Maj Sherese Ingram",
+        "student_name": "RIST, SEAN ALAN"
+    },
+    {
+        "flight_number": "C33",
+        "instructor_name": "Maj Sherese Ingram",
         "student_name": "ODAME, RICHARD YAW OBIRI"
     },
     {
@@ -1667,11 +1607,6 @@
     {
         "flight_number": "C34",
         "instructor_name": "Maj Andrew McKenna",
-        "student_name": "STEGER, GABRIELA A"
-    },
-    {
-        "flight_number": "C34",
-        "instructor_name": "Maj Andrew McKenna",
         "student_name": "HAFKE, DARREN W"
     },
     {
@@ -1683,6 +1618,11 @@
         "flight_number": "C34",
         "instructor_name": "Maj Andrew McKenna",
         "student_name": "ROBBINS, DANE W"
+    },
+    {
+        "flight_number": "C34",
+        "instructor_name": "Maj Andrew McKenna",
+        "student_name": "KANATUS, TINA TRANG"
     },
     {
         "flight_number": "C34",
@@ -1713,11 +1653,6 @@
         "flight_number": "C36",
         "instructor_name": "Maj Paul Ferris",
         "student_name": "TARBOX, JONATHAN B"
-    },
-    {
-        "flight_number": "C36",
-        "instructor_name": "Maj Paul Ferris",
-        "student_name": "MONSEU, EVAN M"
     },
     {
         "flight_number": "C36",
@@ -1812,11 +1747,6 @@
     {
         "flight_number": "C37",
         "instructor_name": "Capt Jaren Rone",
-        "student_name": "TYUKAYEV, DENNIS"
-    },
-    {
-        "flight_number": "C37",
-        "instructor_name": "Capt Jaren Rone",
         "student_name": "DONOVAN, PATRICK CHRISTOPHE"
     },
     {
@@ -1843,6 +1773,11 @@
         "flight_number": "C37",
         "instructor_name": "Capt Jaren Rone",
         "student_name": "BROSOTO, FRANCHETTE J"
+    },
+    {
+        "flight_number": "C37",
+        "instructor_name": "Capt Jaren Rone",
+        "student_name": "REGINA, MICHAEL DOMINICK"
     },
     {
         "flight_number": "C37",
@@ -1947,7 +1882,7 @@
     {
         "flight_number": "C41",
         "instructor_name": "Maj Andrew Zimmerman",
-        "student_name": "KOCHIN, EDWARD VLAD"
+        "student_name": "MCCABE, DYLAN J"
     },
     {
         "flight_number": "C41",
@@ -1997,6 +1932,11 @@
     {
         "flight_number": "C44",
         "instructor_name": "Maj Richard Odom",
+        "student_name": "HOBSON, RICHARD N III"
+    },
+    {
+        "flight_number": "C44",
+        "instructor_name": "Maj Richard Odom",
         "student_name": "MCALLISTER, ETHAN G"
     },
     {
@@ -2018,11 +1958,6 @@
         "flight_number": "C44",
         "instructor_name": "Maj Richard Odom",
         "student_name": "RILEY, GEORGE LAWRENCE"
-    },
-    {
-        "flight_number": "C44",
-        "instructor_name": "Maj Richard Odom",
-        "student_name": "SPARKS, CAYDEN R"
     },
     {
         "flight_number": "C44",
@@ -2097,17 +2032,17 @@
     {
         "flight_number": "C46",
         "instructor_name": "Maj Mike Wurth",
+        "student_name": "UTZ, EMILEE C"
+    },
+    {
+        "flight_number": "C46",
+        "instructor_name": "Maj Mike Wurth",
         "student_name": "PREDDY, ABRAHAM J"
     },
     {
         "flight_number": "C46",
         "instructor_name": "Maj Mike Wurth",
         "student_name": "TORO, ANGIE PAOLA"
-    },
-    {
-        "flight_number": "C46",
-        "instructor_name": "Maj Mike Wurth",
-        "student_name": "SAPIENZA, GABRIELLE"
     },
     {
         "flight_number": "C46",
@@ -2203,11 +2138,6 @@
         "flight_number": "F61",
         "instructor_name": "Maj Jason Argyle",
         "student_name": "DEAN, CARLYANN K"
-    },
-    {
-        "flight_number": "F61",
-        "instructor_name": "Maj Jason Argyle",
-        "student_name": "KNAPP, ALEXANDER W"
     },
     {
         "flight_number": "F61",
@@ -2410,19 +2340,9 @@
         "student_name": "KELSEY, BRIAN A"
     },
     {
-        "flight_number": "F63",
-        "instructor_name": "Maj Dionte Watson",
-        "student_name": "HUBBARD, KENDALL PAIGE"
-    },
-    {
         "flight_number": "F64",
         "instructor_name": "Capt Joshua Gilmer",
         "student_name": "WALLWORTH, JOSHUA J"
-    },
-    {
-        "flight_number": "F64",
-        "instructor_name": "Capt Joshua Gilmer",
-        "student_name": "SCHWAEGEL, COLE M"
     },
     {
         "flight_number": "F64",
@@ -2485,11 +2405,6 @@
         "student_name": "LACROIX, KAREEN"
     },
     {
-        "flight_number": "F64",
-        "instructor_name": "Capt Joshua Gilmer",
-        "student_name": "MCQUAGGE, JESSICA D"
-    },
-    {
         "flight_number": "F65",
         "instructor_name": "Capt John Marrero",
         "student_name": "PLUEMER, PIERCE DIXON"
@@ -2528,11 +2443,6 @@
         "flight_number": "F65",
         "instructor_name": "Capt John Marrero",
         "student_name": "SANDERS, JORDAN A"
-    },
-    {
-        "flight_number": "F65",
-        "instructor_name": "Capt John Marrero",
-        "student_name": "LINDGREN, MAX ERIK"
     },
     {
         "flight_number": "F65",
@@ -2632,17 +2542,17 @@
     {
         "flight_number": "F67",
         "instructor_name": "Maj James Chaplin",
+        "student_name": "KNAPP, ALEXANDER W"
+    },
+    {
+        "flight_number": "F67",
+        "instructor_name": "Maj James Chaplin",
         "student_name": "DEAN, MASON J"
     },
     {
         "flight_number": "F67",
         "instructor_name": "Maj James Chaplin",
         "student_name": "BONNEAU, MICHAEL L"
-    },
-    {
-        "flight_number": "F67",
-        "instructor_name": "Maj James Chaplin",
-        "student_name": "YOO, RYAN J"
     },
     {
         "flight_number": "F67",
@@ -2727,6 +2637,11 @@
     {
         "flight_number": "F68",
         "instructor_name": "Lt Col John Kulikowski",
+        "student_name": "FREEMAN, DAMION M"
+    },
+    {
+        "flight_number": "F68",
+        "instructor_name": "Lt Col John Kulikowski",
         "student_name": "MORGAN, CHRISTOPHER MICHAEL"
     },
     {
@@ -2762,17 +2677,7 @@
     {
         "flight_number": "F68",
         "instructor_name": "Lt Col John Kulikowski",
-        "student_name": "ALY, MOHAMED GOUDA METWALLY"
-    },
-    {
-        "flight_number": "F68",
-        "instructor_name": "Lt Col John Kulikowski",
         "student_name": "PIMENTEL SUAREZ, ARMANDO"
-    },
-    {
-        "flight_number": "F70",
-        "instructor_name": "Maj Benjamin Jones",
-        "student_name": "HOBSON, RICHARD N III"
     },
     {
         "flight_number": "F70",
@@ -2838,6 +2743,11 @@
         "flight_number": "F70",
         "instructor_name": "Maj Benjamin Jones",
         "student_name": "REDMAN, LAUREN L"
+    },
+    {
+        "flight_number": "F70",
+        "instructor_name": "Maj Benjamin Jones",
+        "student_name": "CHARNVANICHBORIKARN, PATARA"
     },
     {
         "flight_number": "F71",
@@ -2907,7 +2817,7 @@
     {
         "flight_number": "F71",
         "instructor_name": "Maj Eric Roe",
-        "student_name": "PALMER, MIKHAIL"
+        "student_name": "ALY, MOHAMED GOUDA METWALLY"
     },
     {
         "flight_number": "F72",
