@@ -8,6 +8,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy build timestamp to force rebuild (cache buster)
+COPY .buildtime /app/.buildtime
+
 # Copy the rest of the application including static files
 COPY . .
 
