@@ -31,18 +31,10 @@ jobs:
       with:
         project_id: ${{ env.PROJECT_ID }}
 
-    - name: Configure Docker to use gcloud as a credential helper
-      run: gcloud auth configure-docker gcr.io
-
-    - name: Build Docker image
-      run: |
-        docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
-        docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
-
     - name: Deploy to Cloud Run
       run: |
         gcloud run deploy ${{ env.SERVICE_NAME }} \
-          --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
+          --source . \
           --region ${{ env.REGION }} \
           --platform managed \
           --allow-unauthenticated \
@@ -53,6 +45,12 @@ jobs:
           --min-instances 1 \
           --set-env-vars "GOOGLE_CLOUD_PROJECT=directory-app-474617" \
           --quiet
+    
+    - name: Route traffic to latest revision
+      run: |
+        gcloud run services update-traffic ${{ env.SERVICE_NAME }} \
+          --to-latest \
+          --region ${{ env.REGION }}
 
     - name: Get Service URL
       run: |
@@ -64,4 +62,12 @@ jobs:
       run: |
         echo "Testing deployment..."
         curl -f $SERVICE_URL || exit 1
-        echo "✅ Deployment test successful!"
+        echo "Testing search for GRAVDAHL, JAYCE M..."
+        SEARCH_RESULT=$(curl -s "$SERVICE_URL/search?query=JAYCE")
+        if echo "$SEARCH_RESULT" | grep -q "GRAVDAHL"; then
+          echo "✅ Deployment test successful! JAYCE found in roster."
+        else
+          echo "❌ WARNING: JAYCE not found in search results!"
+          echo "Search result: $SEARCH_RESULT"
+          exit 1
+        fi
