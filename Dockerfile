@@ -8,11 +8,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application
+# Copy the rest of the application including static files
 COPY . .
-
-# Make sure the static directory exists and copy roster data to correct location
-RUN mkdir -p static && cp '26A UPDATED.json' static/roster_data.json
 
 # Expose port 8080
 EXPOSE 8080
