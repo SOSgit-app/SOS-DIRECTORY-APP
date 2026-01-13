@@ -62,12 +62,12 @@ jobs:
       run: |
         echo "Testing deployment..."
         curl -f $SERVICE_URL || exit 1
-        echo "Testing search for GRAVDAHL, JAYCE M..."
-        SEARCH_RESULT=$(curl -s "$SERVICE_URL/search?query=JAYCE")
-        if echo "$SEARCH_RESULT" | grep -q "GRAVDAHL"; then
-          echo "✅ Deployment test successful! JAYCE found in roster."
+        echo "Testing search for STAFFORD, JACOB R..."
+        SEARCH_RESULT=$(curl -s "$SERVICE_URL/search?query=JACOB")
+        if echo "$SEARCH_RESULT" | grep -q "STAFFORD"; then
+          echo "✅ Deployment test successful! JACOB found in roster."
         else
-          echo "❌ WARNING: JAYCE not found in search results!"
+          echo "❌ WARNING: JACOB not found in search results!"
           echo "Search result: $SEARCH_RESULT"
           exit 1
         fi
