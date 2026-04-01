@@ -52,14 +52,34 @@ jobs:
         if [ "$deploy_exit" -ne 0 ]; then
           echo "Cloud Run deploy failed (exit $deploy_exit). Fetching recent Cloud Build logs..."
 
-          latest_build_id="$(gcloud builds list --project "${{ env.PROJECT_ID }}" --sort-by=~createTime --limit=1 --format='value(id)' || true)"
+          start_time="$(date -u -d '2 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
+          image_name="gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}"
+          echo "Looking for recent Cloud Builds since: $start_time"
+          echo "Filtering for image: $image_name"
+
+          latest_build_id="$(gcloud builds list \
+            --project "${{ env.PROJECT_ID }}" \
+            --filter="createTime>=$start_time AND images:$image_name" \
+            --sort-by=~createTime \
+            --limit=1 \
+            --format='value(id)' || true)"
           if [ -n "$latest_build_id" ]; then
             echo "Latest Cloud Build ID: $latest_build_id"
             gcloud builds describe "$latest_build_id" --project "${{ env.PROJECT_ID }}" || true
+
+            log_url="$(gcloud builds describe "$latest_build_id" --project "${{ env.PROJECT_ID }}" --format='value(logUrl)' || true)"
+            if [ -n "$log_url" ]; then
+              echo "Cloud Build log URL: $log_url"
+            fi
+
             gcloud builds log "$latest_build_id" --project "${{ env.PROJECT_ID }}" || true
           else
             echo "Could not determine latest Cloud Build ID."
-            gcloud builds list --project "${{ env.PROJECT_ID }}" --sort-by=~createTime --limit=5 || true
+            gcloud builds list \
+              --project "${{ env.PROJECT_ID }}" \
+              --filter="createTime>=$start_time" \
+              --sort-by=~createTime \
+              --limit=10 || true
           fi
 
           exit "$deploy_exit"
