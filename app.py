@@ -14,7 +14,7 @@ def load_student_data():
             print(f"ERROR: File does not exist: {file_path}")
             return []
             
-        with open(file_path, 'r') as file:
+        with open(file_path, 'r', encoding='utf-8-sig') as file:
             data = json.load(file)
             print(f"Successfully loaded {len(data)} student records")
             if len(data) > 0:
