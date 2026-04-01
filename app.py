@@ -28,6 +28,12 @@ def load_student_data():
 def index():
     return render_template('index.html')
 
+@app.route('/dha-remote-access')
+def dha_remote_access():
+    pdf_filename = 'health remote access.pdf'
+    pdf_url = url_for('static', filename=pdf_filename)
+    return render_template('dha_remote_access.html', pdf_url=pdf_url)
+
 @app.route('/search')
 def search():
     try:

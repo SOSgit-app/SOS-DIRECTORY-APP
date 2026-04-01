@@ -40,6 +40,9 @@ firebase-debug.log
 firebase-debug.*.log
 .firebase/
 
+# App logs
+debug.log
+
 # Docker
 .docker/
 docker-compose.override.yml
