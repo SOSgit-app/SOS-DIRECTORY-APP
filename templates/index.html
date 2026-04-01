@@ -317,19 +317,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
-        .tabs a.tab {
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tabs a.tab:visited {
-            color: #555;
-        }
-        .tabs a.tab.active:visited {
-            color: #ffffff;
-        }
-
         /* Content Sections */
         .content-section {
             display: none;
@@ -885,7 +872,7 @@
             <button class="tab" onclick="showContent('maxwell')">Maxwell AFB Map</button>
             <button class="tab" onclick="showContent('internet')">Internet Access</button>
             <button class="tab" onclick="showContent('canvas')">Canvas Instructions</button>
-            <a class="tab" href="{{ url_for('dha_remote_access') }}">DHA Remote Access</a>
+            <button class="tab" onclick="window.location.href='{{ url_for('dha_remote_access') }}'">DHA Remote Access</button>
         </div>
 
         <div id="searchContent" class="content-section active">
