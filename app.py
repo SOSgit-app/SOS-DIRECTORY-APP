@@ -30,9 +30,7 @@ def index():
 
 @app.route('/dha-remote-access')
 def dha_remote_access():
-    pdf_filename = 'health remote access.pdf'
-    pdf_url = url_for('static', filename=pdf_filename)
-    return render_template('dha_remote_access.html', pdf_url=pdf_url)
+    return render_template('dha_remote_access.html')
 
 @app.route('/search')
 def search():
