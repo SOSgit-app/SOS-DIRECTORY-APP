@@ -18,7 +18,7 @@ COPY . .
 RUN echo "=== VERIFYING ROSTER DATA ===" && \
     ls -lh static/roster_data.json && \
     head -20 static/roster_data.json && \
-    python3 -c "import json; data=json.load(open('static/roster_data.json', encoding='utf-8-sig')); print(f'Total students: {len(data)}'); gravdahl=[s for s in data if 'GRAVDAHL' in s.get('student_name','')]; print(f'GRAVDAHL found: {len(gravdahl)}'); [print(f\"  {s['student_name']}\") for s in gravdahl]" && \
+    python3 -c "import json; data=json.load(open('static/roster_data.json', encoding='utf-8-sig')); assert len(data) > 0; print(f'Total students: {len(data)}'); print('Sample:', data[0].get('student_name'))" && \
     echo "=== VERIFICATION COMPLETE ==="
 
 # Expose port 8080
