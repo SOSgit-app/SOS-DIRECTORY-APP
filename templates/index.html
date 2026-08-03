@@ -164,17 +164,6 @@
             .student-name {
                 font-size: 1em;
             }
-            .tabs {
-                flex-wrap: wrap;
-                gap: 6px;
-            }
-            .tab {
-                padding: 10px 18px;
-                font-size: 1em;
-                font-weight: 700;
-                margin: 0 3px;
-                border-radius: 6px;
-            }
             .squadron-info {
                 padding: 0 5px;
             }
@@ -216,27 +205,21 @@
                 font-size: 0.9em;
                 padding-left: 8px;
             }
-            .tabs {
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-            }
-            .tab {
-                padding: 10px 16px;
-                font-size: 0.95em;
-                font-weight: 700;
-                margin: 0;
-                width: 100%;
-                max-width: 220px;
-                text-align: center;
-                border-radius: 6px;
-            }
             .squadron-info {
                 padding: 0;
             }
             .squadron-item {
                 font-size: 0.8em;
                 padding: 6px 10px;
+            }
+            .menu-toggle {
+                top: 12px;
+                right: 12px;
+                width: 42px;
+                height: 42px;
+            }
+            .app-menu {
+                width: min(300px, 92vw);
             }
         }
 
@@ -247,12 +230,6 @@
             h1 {
                 font-size: 1.2em;
                 margin: 25px 0 15px;
-            }
-            .tab {
-                font-size: 0.9em;
-                font-weight: 700;
-                padding: 8px 14px;
-                border-radius: 6px;
             }
             .squadron-item {
                 font-size: 0.75em;
@@ -267,56 +244,133 @@
             }
         }
 
-        /* Tab Styles */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0 30px;
-            border-bottom: 2px solid #00308F;
-            padding-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tab {
-            padding: 12px 24px;
-            margin: 0 4px;
-            font-size: 1.1em;
-            font-weight: 700;
-            color: #555;
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            white-space: nowrap;
-            min-width: fit-content;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .tab.active {
-            color: #ffffff;
-            background: #00308F;
-            border-color: #00308F;
-            box-shadow: 0 4px 8px rgba(0, 48, 143, 0.3);
-        }
-        .tab.active::after {
-            content: '';
+        /* Hamburger menu */
+        .menu-toggle {
             position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 3px;
-            background-color: #00308F;
-            border-radius: 2px;
+            top: 18px;
+            right: 18px;
+            width: 46px;
+            height: 46px;
+            border: 2px solid #00308F;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            z-index: 1002;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
-        .tab:hover {
+        .menu-toggle:hover {
+            background: #f0f4fa;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #00308F;
+            border-radius: 1px;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 27, 63, 0.35);
+            z-index: 1000;
+        }
+        .menu-overlay.open {
+            display: block;
+        }
+        .app-menu {
+            position: absolute;
+            top: 72px;
+            right: 18px;
+            width: 280px;
+            max-height: min(70vh, 520px);
+            overflow-y: auto;
+            background: #fff;
+            border: 2px solid #00308F;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            padding: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .app-menu.open {
+            display: flex;
+        }
+        .menu-item,
+        .menu-group-toggle {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
             color: #00308F;
-            background: #ffffff;
-            border-color: #00308F;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            font-size: 1em;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: background 0.2s ease;
         }
+        .menu-item:hover,
+        .menu-group-toggle:hover {
+            background: #eef3fb;
+        }
+        .menu-item.active {
+            background: #00308F;
+            color: #fff;
+        }
+        .menu-group-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .menu-group-toggle::after {
+            content: '▸';
+            font-size: 0.9em;
+            transition: transform 0.2s ease;
+        }
+        .menu-group.open .menu-group-toggle::after {
+            transform: rotate(90deg);
+        }
+        .menu-submenu {
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            padding: 2px 0 6px 10px;
+            margin-left: 6px;
+            border-left: 2px solid #c5d4ef;
+        }
+        .menu-group.open .menu-submenu {
+            display: flex;
+        }
+        .menu-submenu .menu-item {
+            font-size: 0.95em;
+            font-weight: 600;
+            padding: 10px 12px;
+            color: #1a3a6e;
+        }
+
         /* Content Sections */
         .content-section {
             display: none;
@@ -364,10 +418,6 @@
 
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
-            .tab {
-                padding: 8px 20px;
-                font-size: 1em;
-            }
             .floor-btn {
                 padding: 6px 15px;
                 font-size: 0.9em;
@@ -375,10 +425,6 @@
         }
 
         @media screen and (max-width: 480px) {
-            .tab {
-                padding: 6px 15px;
-                font-size: 0.9em;
-            }
             .floor-btn {
                 padding: 5px 12px;
                 font-size: 0.8em;
@@ -879,15 +925,29 @@
             </div>
         </div>
         
-        <div class="tabs">
-            <button class="tab active" onclick="showContent('search')">Search</button>
-            <button class="tab" onclick="showContent('map')">Map</button>
-            <button class="tab" onclick="showContent('seating')">Polifka Seating Chart</button>
-            <button class="tab" onclick="showContent('maxwell')">Maxwell AFB Map</button>
-            <button class="tab" onclick="showContent('internet')">Internet Access</button>
-            <button class="tab" onclick="showContent('canvas')">Canvas Instructions</button>
-            <button class="tab" onclick="window.location.href='{{ url_for('dha_remote_access') }}'">DHA Remote Access</button>
-        </div>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="appMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+        <nav class="app-menu" id="appMenu" aria-label="App menu">
+            <button type="button" class="menu-item active" data-content="search" onclick="navigateTo('search')">Search</button>
+
+            <div class="menu-group" id="resourcesGroup">
+                <button type="button" class="menu-group-toggle" onclick="toggleResources(event)">Resources</button>
+                <div class="menu-submenu" id="resourcesSubmenu">
+                    <a class="menu-item" href="{{ url_for('static', filename='Resources/SOS_AI_Guidance_July_2026.pdf') }}" target="_blank" rel="noopener noreferrer" onclick="closeMenu()">SOS AI Guidance</a>
+                    <button type="button" class="menu-item" data-content="map" onclick="navigateTo('map')">SOS Map</button>
+                    <button type="button" class="menu-item" data-content="maxwell" onclick="navigateTo('maxwell')">Maxwell AFB Map</button>
+                    <button type="button" class="menu-item" data-content="seating" onclick="navigateTo('seating')">Polifka Seating Chart</button>
+                </div>
+            </div>
+
+            <button type="button" class="menu-item" data-content="internet" onclick="navigateTo('internet')">Internet Access</button>
+            <button type="button" class="menu-item" data-content="canvas" onclick="navigateTo('canvas')">Canvas Instructions</button>
+            <a class="menu-item" href="{{ url_for('dha_remote_access') }}">DHA Remote Access</a>
+        </nav>
 
         <div id="searchContent" class="content-section active">
             <div class="search-container">
@@ -1072,27 +1132,70 @@
             }, 300);
         });
 
-        // Tab switching functionality
+        // Hamburger menu
+        const menuToggle = document.getElementById('menuToggle');
+        const appMenu = document.getElementById('appMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const resourcesGroup = document.getElementById('resourcesGroup');
+
+        function toggleMenu() {
+            const isOpen = appMenu.classList.toggle('open');
+            menuToggle.classList.toggle('open', isOpen);
+            menuOverlay.classList.toggle('open', isOpen);
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            menuOverlay.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+            if (!isOpen) {
+                resourcesGroup.classList.remove('open');
+            }
+        }
+
+        function closeMenu() {
+            appMenu.classList.remove('open');
+            menuToggle.classList.remove('open');
+            menuOverlay.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuOverlay.setAttribute('aria-hidden', 'true');
+            resourcesGroup.classList.remove('open');
+        }
+
+        function toggleResources(event) {
+            event.stopPropagation();
+            resourcesGroup.classList.toggle('open');
+        }
+
+        menuToggle.addEventListener('click', function(event) {
+            event.stopPropagation();
+            toggleMenu();
+        });
+        menuOverlay.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        function navigateTo(contentType) {
+            showContent(contentType);
+            closeMenu();
+        }
+
         function showContent(contentType) {
-            // Hide all content sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
+
+            document.querySelectorAll('.menu-item[data-content]').forEach(item => {
+                item.classList.remove('active');
             });
-            
-            // Show selected content
-            document.getElementById(contentType + 'Content').classList.add('active');
-            
-            // Add active class to selected tab
-            const selectedTab = Array.from(document.querySelectorAll('.tab')).find(tab => 
-                tab.textContent.toLowerCase().includes(contentType.toLowerCase())
-            );
-            if (selectedTab) {
-                selectedTab.classList.add('active');
+
+            const section = document.getElementById(contentType + 'Content');
+            if (section) {
+                section.classList.add('active');
+            }
+
+            const selectedItem = document.querySelector(`.menu-item[data-content="${contentType}"]`);
+            if (selectedItem) {
+                selectedItem.classList.add('active');
             }
         }
 
