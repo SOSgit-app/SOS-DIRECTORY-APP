@@ -1207,11 +1207,6 @@
     {
         "flight_number": "B24",
         "instructor_name": "Maj Matthew Relapse Hansen",
-        "student_name": "RUEHLING, DAVID P"
-    },
-    {
-        "flight_number": "B24",
-        "instructor_name": "Maj Matthew Relapse Hansen",
         "student_name": "SANDERSON, JUSTIN K"
     },
     {
@@ -2953,11 +2948,6 @@
         "flight_number": "F68",
         "instructor_name": "Maj Tamara Dobson",
         "student_name": "SCHNUELLE, BRANDON M"
-    },
-    {
-        "flight_number": "F68",
-        "instructor_name": "Maj Tamara Dobson",
-        "student_name": "LETTMAN, JASMYN A"
     },
     {
         "flight_number": "F68",
