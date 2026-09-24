@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request, url_for
 import json
 import os
 
-# Version: 26F-2026-08-04 (Class 26F - 635 students)
+# Version: 26G-2026-09-24 (Class 26G - 590 students)
 app = Flask(__name__, static_folder='static')
 
 # Load student data from JSON file
