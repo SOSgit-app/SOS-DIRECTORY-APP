@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHA Remote Access</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #001B3F;
+            background-image: linear-gradient(45deg, #001B3F 0%, #00308F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 26px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        h1 {
+            margin: 0;
+            color: #00308F;
+            font-size: 1.8em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+        .back-link {
+            padding: 10px 16px;
+            font-size: 1em;
+            font-weight: 700;
+            color: #ffffff;
+            background: #00308F;
+            border: 2px solid #00308F;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .back-link:hover {
+            background: #001B3F;
+            border-color: #001B3F;
+        }
+        .dha-slides {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+        .slide-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+        }
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+        .step-label {
+            font-weight: 700;
+            color: #00308F;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+        .dha-slide {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+        }
+        @media screen and (max-width: 480px) {
+            h1 { font-size: 1.4em; }
+            .container { width: 96%; padding: 18px; }
+            .dha-slides { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DHA Remote Access</h1>
+            <a class="back-link" href="index.html">Back to Directory</a>
+        </div>
+
+        <div class="dha-slides">
+            <div class="slide-container">
+                <div class="step-container">
+                    <div class="step-label">Step 1</div>
+                    <img src="static/DHA/Slide1.PNG"
+                         alt="DHA Remote Access step 1"
+                         class="dha-slide">
+                </div>
+                <div class="step-container">
+                    <div class="step-label">Step 2</div>
+                    <img src="static/DHA/Slide2.PNG"
+                         alt="DHA Remote Access step 2"
+                         class="dha-slide">
+                </div>
+                <div class="step-container">
+                    <div class="step-label">Step 3</div>
+                    <img src="static/DHA/Slide3.PNG"
+                         alt="DHA Remote Access step 3"
+                         class="dha-slide">
+                </div>
+                <div class="step-container">
+                    <div class="step-label">Step 4</div>
+                    <img src="static/DHA/Slide4.PNG"
+                         alt="DHA Remote Access step 4"
+                         class="dha-slide">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

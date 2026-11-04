@@ -1,10 +1,9 @@
 name: Deploy to Google Cloud Run
 
+# Cloud Run deploy disabled — site now publishes via GitHub Pages.
+# Keep this workflow for optional manual redeploys only.
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 env:
   PROJECT_ID: directory-app-474617
